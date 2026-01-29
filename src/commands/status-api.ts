@@ -82,12 +82,14 @@ async function statusCommand() {
       const model = response.model_remains[0];
       const used = model.current_interval_usage_count;
       const total = model.current_interval_total_count;
+      const remaining = total - used;
       const percent = ((used / total) * 100).toFixed(1);
       
       console.log(`🤖 Model: ${model.model_name}`);
-      console.log(`💰 Prompts: ${used} / ${total}`);
-      console.log(`📈 Used: ${percent}%`);
-      console.log(`📅 Period: ${new Date(model.start_time).toLocaleString()} - ${new Date(model.end_time).toLocaleString()}`);
+      console.log(`💰 已使用: ${used} / ${total} prompts`);
+      console.log(`💰 剩余: ${remaining} prompts`);
+      console.log(`📈 使用率: ${percent}%`);
+      console.log(`📅 周期: ${new Date(model.start_time).toLocaleString()} - ${new Date(model.end_time).toLocaleString()}`);
     } else {
       console.log('⚠️  No quota data found');
     }
