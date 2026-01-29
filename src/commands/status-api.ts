@@ -80,14 +80,16 @@ async function statusCommand() {
     
     if (response.model_remains && response.model_remains.length > 0) {
       const model = response.model_remains[0];
-      const used = model.current_interval_usage_count;
       const total = model.current_interval_total_count;
-      const remaining = total - used;
+      
+      // API returns usage as "remaining" - verify with user's page
+      const remainingFromApi = model.current_interval_usage_count;
+      const used = total - remainingFromApi;
       const percent = ((used / total) * 100).toFixed(1);
       
       console.log(`🤖 Model: ${model.model_name}`);
       console.log(`💰 已使用: ${used} / ${total} prompts`);
-      console.log(`💰 剩余: ${remaining} prompts`);
+      console.log(`💰 剩余: ${remainingFromApi} prompts`);
       console.log(`📈 使用率: ${percent}%`);
       console.log(`📅 周期: ${new Date(model.start_time).toLocaleString()} - ${new Date(model.end_time).toLocaleString()}`);
     } else {
