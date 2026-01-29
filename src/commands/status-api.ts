@@ -22,7 +22,7 @@ function getQuota(): Promise<QuotaResponse> {
     let cookieHeader = '';
     try {
       const cookies = JSON.parse(
-        fs.readFileSync(path.join(__dirname, '..', 'auth', 'minimax_cookies.json'), 'utf-8')
+        fs.readFileSync(path.join(__dirname, '..', '..', 'auth', 'minimax_cookies.json'), 'utf-8')
       );
       cookieHeader = cookies
         .map((c: any) => `${c.name}=${c.value}`)

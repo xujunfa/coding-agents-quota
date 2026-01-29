@@ -30,7 +30,7 @@ async function loginAndSave() {
       // Save ALL cookies
       const cookies = await context.cookies();
       fs.writeFileSync(
-        path.join(__dirname, '..', 'auth', 'minimax_cookies.json'),
+        path.join(__dirname, '..', '..', 'auth', 'minimax_cookies.json'),
         JSON.stringify(cookies, null, 2)
       );
       
